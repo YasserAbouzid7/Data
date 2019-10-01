@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<!-- ajouter les fichiers dans appContext -->
+
+
+<context:component-scan base-package="ma.jit.comSpring.DAO"></context:component-scan>
+     <context:component-scan base-package="ma.jit.comSpring.Service"></context:component-scan>
+	<bean id="datasource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${dbuser}" />
+		<property name="password" value="${dbpassword}" />
+	</bean>
+
+	<bean id="location"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+
+			<list>
+				<value>database.properties</value>
+			</list>
+		</property>
+	</bean>
+
+<bean id="jdbcTemplate"
+        class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg name="dataSource" ref="datasource"></constructor-arg>
+    </bean>
+    
+    
+
+
+
+</beans>
